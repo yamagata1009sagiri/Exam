@@ -35,9 +35,6 @@
 						<div class="mt-2 text-warning">${errors.get("name")}</div>
 					</div>
 					<div class="mt-3">
-					<!--
-						<input class="btn btn-secondary" type="submit" value="登録して再度入力" name="continue">
-					 -->
 						<input class="btn btn-primary" type="submit" value="登録">
 					</div>
 				</div>
