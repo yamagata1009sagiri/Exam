@@ -12,12 +12,7 @@
 	<c:param name="content">
 		<section class="me-4">
 			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">科目情報登録</h2>
-			<%-- パラメーターdoneが存在する場合 --%>
-			<c:if test="${!empty done}">
-				<div class="bg-success bg-opacity-50 text-center lh-lg">
-					<p>${done}</p>
-				</div>
-			</c:if>
+
 			<form action = "SubjectCreateExecute.action" method="post">
 				<div class="mx-3 py-2">
 					<div class="my-3">
@@ -25,7 +20,7 @@
 						<input class="form-control" type="text" id="subject-cd-input" name="cd"
 							placeholder="科目コードを入力してください" maxlength="3" value="${cd}" required />
 						<div class="mt-2 text-warning">${errors.get("cd")}</div>
-						<!-- 科目コード：三文字で入力。科目名：重複を許さないようにする（未完） -->
+						<!-- 科目コード：三文字で入力。科目名：重複を許さないようにする -->
 					</div>
 					<div class="my-3">
 						<label class="form-label" for="subject-name-input">科目名</label>
