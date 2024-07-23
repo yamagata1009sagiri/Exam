@@ -93,10 +93,86 @@ public class SubjectDao extends Dao{
 	}
 
 	public boolean save(Subject subject) throws Exception {
-		return true;
+
+		Connection connection = getConnection();
+		PreparedStatement statement = null;
+		int count = 0;
+
+		try {
+			Subject old = get(subject.getCd(), subject.getSchool());
+			if (old == null) {
+				statement = connection.prepareStatement(
+					"insert into subject(name, cd, school_cd) values(?, ?, ?)");
+				statement.setString(1, subject.getName());
+				statement.setString(2, subject.getCd());
+				statement.setString(3, subject.getSchool().getCd());
+			} else {
+				statement = connection.prepareStatement(
+					"update subject set name = ? where cd = ?");
+				statement.setString(1, subject.getName());
+				statement.setString(2, subject.getCd());
+			}
+
+			count = statement.executeUpdate();
+
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		}
+		if (count > 0) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public boolean delete(Subject subject) throws Exception {
-		return true;
+
+		Connection connection = getConnection();
+		PreparedStatement statement = null;
+		int count = 0;
+
+		try {
+			statement = connection.prepareStatement(
+				"delete from subject where cd = ?");
+			statement.setString(1, subject.getCd());
+			count = statement.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		}
+		if (count > 0) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
