@@ -11,6 +11,7 @@ public class Test implements Serializable {
 	private int no;
 	private int point;
 
+	// コンストラクタ
 	public Subject getSubject() {
 		return subject;
 	}
