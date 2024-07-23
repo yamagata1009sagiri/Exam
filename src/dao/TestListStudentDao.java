@@ -12,6 +12,10 @@ import bean.TestListStudent;
 
 public class TestListStudentDao extends Dao {
 
+	private String baseSql = "SELECT SJ.name as sj_name, SJ.cd as sj_cd, T.no as t_no, "
+			+ "T.point as t_point FROM student ST inner join (test T inner join subject SJ on T.subject_cd = SJ.cd) "
+			+ "on ST.no = T.student_no ";
+
 	private List<TestListStudent> postFilter(ResultSet rSet) throws Exception {
 		List<TestListStudent> list = new ArrayList<>();
 
@@ -34,11 +38,11 @@ public class TestListStudentDao extends Dao {
 		PreparedStatement statement = null;
 		ResultSet rSet = null;
 
+		String condition = "where ST.no = ? ";
+		String order = "order by SJ.cd asc, T.no asc";
+
 		try {
-			statement = connection.prepareStatement(
-				"SELECT SJ.name as sj_name, SJ.cd as sj_cd, T.no as t_no, T.point as t_point "
-				+ "FROM student ST inner join (test T inner join subject SJ on T.subject_cd=SJ.cd) "
-				+ "on ST.no=T.student_no where ST.no=? order by SJ.cd asc, T.no asc");
+			statement = connection.prepareStatement(baseSql + condition + order);
 			statement.setString(1, student.getNo());
 			rSet = statement.executeQuery();
 			list = postFilter(rSet);
