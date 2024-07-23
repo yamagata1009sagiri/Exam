@@ -12,6 +12,12 @@ import bean.Subject;
 import bean.TestListSubject;
 
 public class TestListSubjectDao extends Dao {
+
+	private String baseSql = "SELECT ST.ent_year as st_ent_year, ST.no as st_no, ST.name as st_name, "
+			+ "ST.class_num as st_class_num, T.no as t_no, T.point as t_point "
+			+ "FROM student ST left outer join (test T inner join subject SJ on T.subject_cd = SJ.cd) "
+			+ "on ST.no = T.student_no ";
+
 	private List<TestListSubject> postFilter(ResultSet rSet) throws Exception {
 
 		List<TestListSubject> list = new ArrayList<>();
@@ -55,14 +61,12 @@ public class TestListSubjectDao extends Dao {
 		List<TestListSubject> list = new ArrayList<>();
 		ResultSet rSet = null;
 
+		String condition = "and T.subject_cd=? where ST.ent_year = ? "
+				+ "and ST.class_num = ? and ST.school_cd = ? and ST.is_attend = true ";
+		String order = "order by ST.no asc, T.no asc";
+
 		try {
-			statement = connection.prepareStatement(
-					"SELECT ST.ent_year as st_ent_year, ST.no as st_no, ST.name as st_name, "
-					+ "ST.class_num as st_class_num, T.no as t_no, T.point as t_point "
-					+ "FROM student ST left outer join (test T inner join subject SJ on T.subject_cd=SJ.cd) "
-					+ "on ST.no=T.student_no and T.subject_cd=? where ST.ent_year=? "
-					+ "and ST.class_num=? and ST.school_cd=? and ST.is_attend=true "
-					+ "order by ST.no asc, T.no asc");
+			statement = connection.prepareStatement(baseSql + condition + order);
 			statement.setString(1, subject.getCd());
 			statement.setInt(2, entYear);
 			statement.setString(3, classNum);
