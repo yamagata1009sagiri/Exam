@@ -61,7 +61,7 @@ public class TestRegistAction extends Action {
 
 		//回数
 		int num = 0;
-		if (numSet != null) {
+		if (numStr != null) {
 			// 数値に変換
 			num = Integer.parseInt(numStr);
 		}
