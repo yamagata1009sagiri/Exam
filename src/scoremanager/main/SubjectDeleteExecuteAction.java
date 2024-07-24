@@ -37,8 +37,8 @@ public class SubjectDeleteExecuteAction extends Action {
 			errors.put("cd", "科目が存在していません");
 			req.setAttribute("errors", errors);
 			req.setAttribute("cd", cd);
-
-
+			req.getRequestDispatcher("subject_delete.jsp").forward(req, res);
+		} else {
 			// 科目の削除を実行して科目削除完了画面へ遷移
 			dao.delete(subject);
 			req.getRequestDispatcher("subject_delete_done.jsp").forward(req, res);
