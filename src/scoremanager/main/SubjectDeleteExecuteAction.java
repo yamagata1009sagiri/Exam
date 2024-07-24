@@ -3,11 +3,11 @@ package scoremanager.main;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.security.auth.Subject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bean.Subject;
 import bean.Teacher;
 import dao.SubjectDao;
 import tool.Action;
@@ -28,7 +28,7 @@ public class SubjectDeleteExecuteAction extends Action {
 		cd = req.getParameter("cd");//科目コード
 
 		//DBからデータ取得 3
-//		subject = dao.get(cd, teacher.getSchool());//科目
+		subject = dao.get(cd, teacher.getSchool());//科目
 
 		//JSPへフォワード
 		//エラーがあったかどうかで内容が分岐
@@ -40,7 +40,7 @@ public class SubjectDeleteExecuteAction extends Action {
 
 
 			// 科目の削除を実行して科目削除完了画面へ遷移
-//			dao.delete(subject);
+			dao.delete(subject);
 			req.getRequestDispatcher("subject_delete_done.jsp").forward(req, res);
 		}
 	}
