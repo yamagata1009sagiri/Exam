@@ -15,22 +15,22 @@
 			<div class="my-2 text-end px-4">
 				<a href="SubjectCreate.action">新規登録</a>
 			</div>
-					<table class="table table-hover">
-						<tr>
-							<th>科目コード</th>
-							<th>科目名</th>
-							<th></th>
-							<th></th>
-						</tr>
-						<c:forEach var="subject" items="${subject}">
-							<tr>
-								<td>${subject.cd}</td>
-								<td>${subject.name}</td>
-								<td><a href="SubjectUpdate.action?cd=${subject.cd}&name=${subject.name}">変更</a></td>
-								<td><a href="SubjectDelete.action?cd=${subject.cd}&name=${subject.name}">削除</a></td>
-							</tr>
-						</c:forEach>
-					</table>
+			<table class="table table-hover">
+				<tr>
+					<th>科目コード</th>
+					<th>科目名</th>
+					<th></th>
+					<th></th>
+				</tr>
+				<c:forEach var="subject" items="${subjects}">
+					<tr>
+						<td>${subject.cd}</td>
+						<td>${subject.name}</td>
+						<td><a href="SubjectUpdate.action?cd=${subject.cd}&name=${subject.name}">変更</a></td>
+						<td><a href="SubjectDelete.action?cd=${subject.cd}&name=${subject.name}">削除</a></td>
+					</tr>
+				</c:forEach>
+			</table>
 		</section>
 	</c:param>
 </c:import>
