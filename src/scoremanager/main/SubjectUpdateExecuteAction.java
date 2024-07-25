@@ -23,12 +23,12 @@ public class SubjectUpdateExecuteAction extends Action{
 		Map<String, String> errors = new HashMap<>();
 		HttpSession session = req.getSession();//セッション
 		Teacher teacher = (Teacher)session.getAttribute("user");// ログインユーザーを取得
-		Subject subject =subDao.get(cd, teacher.getSchool());
 
 		//リクエストパラメータ―の取得 2
 		cd = req.getParameter("cd");//科目コード
 		name = req.getParameter("name");//科目名
 
+		Subject subject = subDao.get(cd, teacher.getSchool());
 
     	//エラーがあったかどうかで手順5~7の内容が分岐
     	//レスポンス値をセット 6
@@ -36,8 +36,6 @@ public class SubjectUpdateExecuteAction extends Action{
 		//DBへデータ保存 5
 		if (subject==null) {
 			// 更新対象の科目が存在しないのでエラーページへ遷移
-			subject = new Subject();
-			// インスタンスに値をセット
 			errors.put("cd","科目が存在していません");
 			req.setAttribute("cd",cd );
 			req.setAttribute("name",name);
@@ -49,7 +47,7 @@ public class SubjectUpdateExecuteAction extends Action{
 			//科目情報を更新
 			subDao.save(subject);
 			//科目更新完了画面へ遷移
-			req.getRequestDispatcher("subject_update.jsp").forward(req, res);
+			req.getRequestDispatcher("subject_update_done.jsp").forward(req, res);
 		}
 
 	}

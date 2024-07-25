@@ -18,7 +18,7 @@
 					<div class="my-3">
 						<label class="form-label" for="subject-cd-input">科目コード</label>
 						<input readonly class="form-control-plaintext ms-3" type="text" id="subject-cd-input" name="cd"
-							"value="${cd}" required />
+							value="${cd}" required />
 						<div class="mt-2 text-warning">${errors.get("cd")}</div>
 						<!-- 科目コード：三文字で入力。科目名：重複を許さないようにする -->
 					</div>
