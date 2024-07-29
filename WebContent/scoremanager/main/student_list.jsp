@@ -51,9 +51,16 @@
 					<div class="mt-2 text-warning">${errors.get("f1")}</div>
 				</div>
 			</form>
+			<% int i = 0; %>
+			<c:forEach var="stu" items="${students}">
+				<c:if test="${empty f3 || stu.isAttend()}">
+					<% i++; %>
+				</c:if>
+			</c:forEach>
+			<% request.setAttribute("i", i); %>
 			<c:choose>
-				<c:when test="${students.size()>0}">
-					<div>検索結果：${students.size()}件</div>
+				<c:when test="${i > 0}">
+					<div>検索結果：${i}件</div>
 					<table class="table table-hover">
 						<tr>
 							<th>入学年度</th>
@@ -65,24 +72,26 @@
 							<th></th>
 						</tr>
 						<c:forEach var="student" items="${students}">
-							<tr>
-								<td>${student.entYear}</td>
-								<td>${student.no}</td>
-								<td>${student.name}</td>
-								<td>${student.classNum}</td>
-								<td class="text-center">
-									<%-- 在学フラグがたっている場合「○」それ以外は「×」を表示 --%>
-									<c:choose>
-										<c:when test="${student.isAttend()}">
-											○
-										</c:when>
-										<c:otherwise>
-											×
-										</c:otherwise>
-									</c:choose>
-								</td>
-								<td><a href="StudentUpdate.action?no=${student.no}">変更</a></td>
-							</tr>
+							<c:if test="${empty f3 || student.isAttend()}">
+								<tr>
+									<td>${student.entYear}</td>
+									<td>${student.no}</td>
+									<td>${student.name}</td>
+									<td>${student.classNum}</td>
+									<td class="text-center">
+										<%-- 在学フラグがたっている場合「○」それ以外は「×」を表示 --%>
+										<c:choose>
+											<c:when test="${student.isAttend()}">
+												○
+											</c:when>
+											<c:otherwise>
+												×
+											</c:otherwise>
+										</c:choose>
+									</td>
+									<td><a href="StudentUpdate.action?no=${student.no}">変更</a></td>
+								</tr>
+							</c:if>
 						</c:forEach>
 					</table>
 				</c:when>
