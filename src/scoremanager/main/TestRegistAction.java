@@ -27,7 +27,6 @@ public class TestRegistAction extends Action {
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		//ローカル変数の宣言 1
 		Subject subject = null;
-		School school = null;
 
 		// Daoを初期化
 		TestDao testDao = new TestDao();
@@ -36,6 +35,7 @@ public class TestRegistAction extends Action {
 
 		HttpSession session = req.getSession(true);//セッション
 		Teacher teacher = (Teacher)session.getAttribute("user");//ログインユーザー
+		School school = teacher.getSchool();
 		List<Test> tests = null;
 		Map<String, String> errors = new HashMap<>();// エラーメッセージ
 

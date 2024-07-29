@@ -22,6 +22,7 @@ import dao.TestDao;
 import tool.Action;
 
 public class TestRegistExecuteAction extends Action {
+
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		//ローカル変数の宣言 1
@@ -31,7 +32,7 @@ public class TestRegistExecuteAction extends Action {
 		SubjectDao subDao = new SubjectDao();// 科目Dao
 		StudentDao stuDao = new StudentDao(); // 学生Dao
 		ClassNumDao cNumDao = new ClassNumDao();// クラス番号Dao
-		School school = new School(); // 学校
+		School school = teacher.getSchool(); // 学校
 
 		Map<String, String> errors = new HashMap<>();//エラーメッセージ
 		Map<String, String> inPoint = new HashMap<>(); //得点の入れ箱
@@ -44,7 +45,7 @@ public class TestRegistExecuteAction extends Action {
 		String[] studentNoSet = req.getParameterValues("student_no_set[]");
 
 		//DBからデータ取得 3
-		List<String> list = cNumDao.filter(teacher.getSchool());
+		List<String> list = cNumDao.filter(school);
 		Subject subjects= subDao.get(subjectCd, school);
 
 		//ビジネスロジック 4
@@ -55,12 +56,12 @@ public class TestRegistExecuteAction extends Action {
 			String pointStr = null; //得点の文字
 
 			// 得点_学生番号の取得
-			pointStr = req.getParameter("point" + studentNo);
+			pointStr = req.getParameter("point_" + studentNo);
 			// 得点用のmapに学生番号と文字型得点を格納
 			inPoint.put(studentNo, pointStr);
 
 			// 文字型得点に中身がなければ再度操作させる
-			if (inPoint.isEmpty()) {
+			if (pointStr.isEmpty()) {
 				continue;
 			}
 
@@ -69,7 +70,7 @@ public class TestRegistExecuteAction extends Action {
 
 			try {
 				point = Integer.parseInt(pointStr);
-			} catch (Exception e) {
+			} catch (NumberFormatException e) {
 				// 数字以外の入力の場合、エラーメッセージ
 				errors.put(studentNo, "整数以外入力できません");
 				break;
@@ -77,7 +78,7 @@ public class TestRegistExecuteAction extends Action {
 
 			// 点数が0～100でなかった場合、エラーメッセージ
 			if (point < 0 || 100 < point) {
-				errors.put(pointStr, "0～100の範囲で入力してください");
+				errors.put(studentNo, "0～100の範囲で入力してください");
 				break;
 			}
 
@@ -108,7 +109,7 @@ public class TestRegistExecuteAction extends Action {
 		if(errors.size() > 0){//エラーがあった場合
 			// リクエスト属性をセット
 			req.setAttribute("errors", errors);
-			req.getRequestDispatcher("error.jsp").forward(req, res);
+			req.getRequestDispatcher("TestRegist.action").forward(req, res);
 		} else {// 正常時
 			// リクエスト用に得点mapをセット
 			req.setAttribute("input_points", inPoint);
@@ -120,7 +121,7 @@ public class TestRegistExecuteAction extends Action {
 			testDao.delete(delList);
 
 			// 登録を続ける場合
-			if (req.getParameter("contiue") != null){
+			if (req.getParameter("continue") != null){
 				//完了のメッセージ
 				req.setAttribute("done", "登録が完了しました");
 				// 入力画面にフォワード
