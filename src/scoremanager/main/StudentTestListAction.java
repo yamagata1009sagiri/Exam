@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.Student;
+import bean.Subject;
 import bean.Teacher;
 import bean.TestListStudent;
 import dao.ClassNumDao;
@@ -39,6 +40,12 @@ public class StudentTestListAction extends Action {
 		String f = req.getParameter("f");
 		String studentNo = req.getParameter("f4");
 		errors = (HashMap<String, String>)req.getAttribute("errors");
+		List<String> list = cNumDao.filter(teacher.getSchool());
+		List<Subject> subjects = sDao.filter(teacher.getSchool());
+
+		for (int i = year - 10; i < year + 10; i++) {
+			entYearSet.add(i);
+		}
 
 		if (studentNo != null) {
 			StudentDao studentDao = new StudentDao();
@@ -55,6 +62,9 @@ public class StudentTestListAction extends Action {
 		}
 		req.setAttribute("student", student);
 		req.setAttribute("tests", tests);
+		req.setAttribute("class_num_set", list);
+		req.setAttribute("ent_year_set", entYearSet);
+		req.setAttribute("subjects", subjects);
 
 		req.getRequestDispatcher("test_list_student.jsp").forward(req, res);
 	}
