@@ -394,4 +394,40 @@ public class StudentDao extends Dao{
 			return false;
 		}
 	}
+
+	public boolean delete(String no) throws Exception {
+
+		Connection connection = getConnection();
+		PreparedStatement statement = null;
+		int count = 0;
+
+		try {
+			statement = connection.prepareStatement(
+				"delete from student where no = ?");
+			statement.setString(1, no);
+			count = statement.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		}
+		if (count > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
