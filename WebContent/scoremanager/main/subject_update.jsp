@@ -12,19 +12,17 @@
 	<c:param name="content">
 		<section class="me-4">
 			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">科目情報変更</h2>
-
-			<form action = "SubjectUpdateExecute.action" method="post">
+			<form action="SubjectUpdateExecute.action" method="post">
 				<div class="mx-3 py-2">
-					<div class="my-3">
+					<div class="mb-3">
 						<label class="form-label" for="subject-cd-input">科目コード</label>
-						<input readonly class="form-control-plaintext ms-3" type="text" id="subject-cd-input" name="cd"
-							value="${cd}" required />
+						<input readonly class="form-control-plaintext ms-3" type="text"
+							id="subject-cd-input" name="cd" value="${cd}" />
 						<div class="mt-2 text-warning">${errors.get("cd")}</div>
-						<!-- 科目コード：三文字で入力。科目名：重複を許さないようにする -->
 					</div>
-					<div class="my-3">
+					<div class="mb-3">
 						<label class="form-label" for="subject-name-input">科目名</label>
-						<input class="form-control" type="text" id="student-name-input"
+						<input class="form-control" type="text" id="subject-name-input"
 							name="name" placeholder="科目名を入力してください" maxlength="20"
 							value="${name}" required />
 						<div class="mt-2 text-warning">${errors.get("name")}</div>

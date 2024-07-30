@@ -34,12 +34,12 @@ public class SubjectUpdateExecuteAction extends Action{
     	//レスポンス値をセット 6
     	//JSPへフォワード 7
 		//DBへデータ保存 5
-		if (subject==null) {
+		if (subject == null) {
 			// 更新対象の科目が存在しないのでエラーページへ遷移
-			errors.put("cd","科目が存在していません");
-			req.setAttribute("cd",cd );
-			req.setAttribute("name",name);
-			req.setAttribute("errors",errors);
+			errors.put("cd", "科目が存在していません");
+			req.setAttribute("cd", cd);
+			req.setAttribute("name", name);
+			req.setAttribute("errors", errors);
 			req.getRequestDispatcher("error.jsp").forward(req, res);
 		} else {
 			//科目の更新を実行して科目完了画面へ遷移
