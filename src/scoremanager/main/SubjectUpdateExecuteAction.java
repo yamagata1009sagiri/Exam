@@ -40,7 +40,7 @@ public class SubjectUpdateExecuteAction extends Action{
 			req.setAttribute("cd", cd);
 			req.setAttribute("name", name);
 			req.setAttribute("errors", errors);
-			req.getRequestDispatcher("error.jsp").forward(req, res);
+			req.getRequestDispatcher("subject_update.jsp").forward(req, res);
 		} else {
 			//科目の更新を実行して科目完了画面へ遷移
 			subject.setName(name);
