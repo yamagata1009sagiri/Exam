@@ -50,7 +50,7 @@ public class LoginExecuteAction extends Action {
 			// 認証失敗の場合
 			// エラーメッセージをセット
 			List<String> errors = new ArrayList<>();
-			errors.add("IDまたはパスワードが確認できませんでした");
+			errors.add("ログインに失敗しました。IDまたはパスワードが正しくありません。");
 			req.setAttribute("errors", errors);
 			// 入力された教員IDをセット
 			req.setAttribute("id", id);
