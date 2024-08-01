@@ -23,6 +23,7 @@
 						<label class="form-label" for="student-no-input">学生番号</label>
 						<input readonly class="form-control-plaintext ms-3" type="text"
 							id="student-no-input" name="no" value="${no}" />
+						<div class="mt-2 text-warning">${errors.get("no")}</div>
 					</div>
 					<div class="mb-3">
 						<label class="form-label" for="student-name-input">氏名</label>
