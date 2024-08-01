@@ -10,7 +10,7 @@
 
 	<c:param name="content">
 		<section class="me-4">
-			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">科目情報削除</h2>
+			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">学生情報削除</h2>
 			<div class="bg-success bg-opacity-50 text-center lh-lg">
 				<p>削除が完了しました</p>
 			</div>

@@ -11,8 +11,8 @@ public class StudentDeleteAction extends Action {
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		//ローカル変数の宣言
 		//リクエストパラメータ―の取得
-		String no = req.getParameter("no");//科目コード
-		String name = req.getParameter("name");//科目名
+		String no = req.getParameter("no");
+		String name = req.getParameter("name");
 		//レスポンス値をセット
 		req.setAttribute("no", no);
 		req.setAttribute("name", name);

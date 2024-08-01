@@ -11,7 +11,7 @@
 
 	<c:param name="content">
 		<section class="me-4">
-			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">科目情報削除</h2>
+			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">学生情報削除</h2>
 			<form action="StudentDeleteExecute.action" method="post">
 				<div class="mx-3 py-2">
 					<div class="my-3"> 「${name}(${no})」を削除してもよろしいですか</div>
